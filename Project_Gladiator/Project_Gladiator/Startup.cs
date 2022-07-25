@@ -30,6 +30,16 @@ namespace Project_Gladiator
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StudentConnection")));
             services.AddScoped<IUserRepositery, UserRepositery>();
+            services.AddScoped<IClaimRepositery, ClaimRepositery>();
+
+            services.AddScoped<IDetailsRepositery, DetailsRepositery>();
+
+
+            services.AddScoped<IPaymentRepositery, PaymentsRepositery>();
+
+            services.AddScoped<IPlanRepositery,PlanRepositery>();
+            services.AddScoped<IPurchaseRepositery,PurchaseRepositery>();
+            services.AddScoped<IRenewalRepositery, RenewalRepositery>();
             services.AddCors(options =>
             {
                 options.AddPolicy("angularApplication", (builder) =>
