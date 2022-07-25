@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "i3f5EFAoITEMdbviizJbplu1MjxIojcIud/PMgUu+vOLdN5Lt0Pk1PPS02wVO2O00YCuinwEfj9oUAGncM1fZA==",
+  "success": true,
+  "projectFilePath": "E:\\Project_Gladiator\\general-insurance\\Project_Gladiator\\Project_Gladiator\\Project_Gladiator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\91628\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.24\\microsoft.netcore.app.host.win-x64.3.1.24.nupkg.sha512"
+  ],
+  "logs": []
+}
