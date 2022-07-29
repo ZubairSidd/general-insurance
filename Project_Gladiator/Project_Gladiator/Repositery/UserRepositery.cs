@@ -21,11 +21,18 @@ namespace Project_Gladiator.Repositery
         }
         public async Task<User> GetUserAsync(int id)
         {
-            return await _context.Users.Where(x => x.user_id == id).FirstOrDefaultAsync();
+            if (id == null)
+                return null;
+            else
+            {
+                var user = await _context.Users.Where(x => x.user_id == id).FirstOrDefaultAsync();
+                if (user == null) return null;
+                else return user;
+            };
         }
-        public async Task<User> GetByUserNameAndPassword(string username, string password)
+        public async Task<User> GetByUserNameAndPassword(string email, string password)
         {
-            return await _context.Users.Where(u => u.name == username & u.password == password).FirstOrDefaultAsync();
+            return await _context.Users.Where(u => u.email == email & u.password == password).FirstOrDefaultAsync();
         }
 
     }
