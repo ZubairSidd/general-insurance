@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Project_Gladiator.Models;
 using Project_Gladiator.Repositery;
+using Project_Gladiator.UpdateViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,18 @@ namespace Project_Gladiator.Controllers
             var u = await _userRepo.GetByUserNameAndPassword(email, password);
             if (u == null) return NotFound();
             return Ok(u);
+        }
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody]UpdateUserViewModel user)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var registeredUser = await _userRepo.Create(user);
+                return Ok(registeredUser);
+            }
+            else return NotFound("User not created");
         }
 
     }

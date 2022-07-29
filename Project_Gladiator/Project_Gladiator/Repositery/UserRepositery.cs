@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project_Gladiator.Data;
 using Project_Gladiator.Models;
+using Project_Gladiator.UpdateViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,19 @@ namespace Project_Gladiator.Repositery
         public async Task<User> GetByUserNameAndPassword(string email, string password)
         {
             return await _context.Users.Where(u => u.email == email & u.password == password).FirstOrDefaultAsync();
+        }
+
+        public async Task<User> Create(UpdateUserViewModel user)
+        {
+            User model = new User();
+            model.name = user.name;
+            model.email = user.email;
+            model.dob = user.dob;
+            model.password = user.password;
+            model.conf_password = user.conf_password;
+            await _context.Users.AddAsync(model);
+            await _context.SaveChangesAsync();
+            return model; 
         }
 
     }
