@@ -30,6 +30,7 @@ namespace Project_Gladiator.Controllers
             return Ok(await _userRepo.GetUserAsync(id));
         }
         
+        [Route("[action]")]
         public async Task<IActionResult> Login(string username, string password)
         {
             var u = await _userRepo.GetByUserNameAndPassword(username, password);
