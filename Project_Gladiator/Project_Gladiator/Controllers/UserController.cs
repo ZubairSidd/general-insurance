@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Project_Gladiator.Models;
 using Project_Gladiator.Repositery;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,13 @@ namespace Project_Gladiator.Controllers
         public async Task<IActionResult> GetUser(int id)
         {
             return Ok(await _userRepo.GetUserAsync(id));
+        }
+        
+        public async Task<IActionResult> Login(string username, string password)
+        {
+            var u = await _userRepo.GetByUserNameAndPassword(username, password);
+            if (u == null) return BadRequest();
+            return Ok(u);
         }
     }
 

@@ -10,5 +10,7 @@ namespace Project_Gladiator.Repositery
     {
         Task<List<User>> GetAllUsersAsync();
         Task<User> GetUserAsync(int id);
+        Task<User> GetByUserNameAndPassword(string username, string password);
+
     }
 }

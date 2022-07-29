@@ -23,6 +23,10 @@ namespace Project_Gladiator.Repositery
         {
             return await _context.Users.Where(x => x.user_id == id).FirstOrDefaultAsync();
         }
+        public async Task<User> GetByUserNameAndPassword(string username, string password)
+        {
+            return await _context.Users.Where(u => u.name == username & u.password == password).FirstOrDefaultAsync();
+        }
 
     }
 }
