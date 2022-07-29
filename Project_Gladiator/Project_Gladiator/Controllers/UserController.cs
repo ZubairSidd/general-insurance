@@ -21,22 +21,27 @@ namespace Project_Gladiator.Controllers
         [Route("[action]")]
         public async Task<IActionResult> GetAllUsers()
         {
+
             return Ok(await _userRepo.GetAllUsersAsync());
         }
 
         [Route("[action]/{Id:int}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            return Ok(await _userRepo.GetUserAsync(id));
+            var user = await _userRepo.GetUserAsync(id);
+            if (user != null) return Ok(User);
+            else return NotFound();
         }
         
         [Route("[action]")]
-        public async Task<IActionResult> Login(string username, string password)
+        [HttpPost]
+        public async Task<IActionResult> Login(string email, string password)
         {
-            var u = await _userRepo.GetByUserNameAndPassword(username, password);
-            if (u == null) return BadRequest();
+            var u = await _userRepo.GetByUserNameAndPassword(email, password);
+            if (u == null) return NotFound();
             return Ok(u);
         }
+
     }
 
 }
