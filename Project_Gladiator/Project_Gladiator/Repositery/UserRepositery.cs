@@ -22,14 +22,9 @@ namespace Project_Gladiator.Repositery
         }
         public async Task<User> GetUserAsync(int id)
         {
-            if (id == null)
-                return null;
-            else
-            {
-                var user = await _context.Users.Where(x => x.user_id == id).FirstOrDefaultAsync();
-                if (user == null) return null;
-                else return user;
-            };
+            var user = await _context.Users.Where(x => x.user_id == id).FirstOrDefaultAsync();
+            if (user == null) return null;
+            else return user;
         }
         public async Task<User> GetByEmailAndPassword(string email, string password)
         {

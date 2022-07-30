@@ -29,16 +29,16 @@ namespace Project_Gladiator.Controllers
         [Route("[action]/{Id:int}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _userRepo.GetUserAsync(id);
+            User user = await _userRepo.GetUserAsync(id);
             if (user != null) return Ok(User);
             else return NotFound();
         }
         
         [Route("[action]")]
         [HttpPost]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Login([FromBody]Login login)
         {
-            var u = await _userRepo.GetByEmailAndPassword(email, password);
+            var u = await _userRepo.GetByEmailAndPassword(login.email, login.password);
             if (u == null) return NotFound();
             return Ok(u);
         }
