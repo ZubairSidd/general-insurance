@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project_Gladiator.Repositery;
+using Project_Gladiator.UpdateViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +29,17 @@ namespace Project_Gladiator.Controllers
         {
             return Ok(await _detailRepo.GetDetailAsync(id));
         }
+        [Route("[action]")]
+        public async Task<IActionResult> Register([FromBody] UpdateDetailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var detail = await _detailRepo.Register(model);
+                return Ok(detail);
+            }
+            else return NotFound("Detail not created");
+        }
+
     }
 }
