@@ -1,4 +1,5 @@
 ﻿using Project_Gladiator.Models;
+using Project_Gladiator.UpdateViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Project_Gladiator.Repositery
     {
         Task<List<Claim>> GetAllClaimsAsync();
         Task<Claim> GetClaimAsync(int id);
+        Task<Claim> Register(UpdateClaimViewModel claim);
     }
 }
