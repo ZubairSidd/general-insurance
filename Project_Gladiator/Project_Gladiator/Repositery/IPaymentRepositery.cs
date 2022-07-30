@@ -1,4 +1,5 @@
 ﻿using Project_Gladiator.Models;
+using Project_Gladiator.UpdateViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace Project_Gladiator.Repositery
     {
         Task<List<Payment>> GetAllPaymentsAsync();
         Task<Payment> GetPaymentAsync(int id);
+
+        Task<Payment> Register(UpdatePaymentViewModel payment);
     }
 }
