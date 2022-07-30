@@ -31,7 +31,7 @@ namespace Project_Gladiator.Repositery
                 else return user;
             };
         }
-        public async Task<User> GetByUserNameAndPassword(string email, string password)
+        public async Task<User> GetByEmailAndPassword(string email, string password)
         {
             return await _context.Users.Where(u => u.email == email & u.password == password).FirstOrDefaultAsync();
         }

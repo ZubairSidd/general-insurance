@@ -38,7 +38,7 @@ namespace Project_Gladiator.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
-            var u = await _userRepo.GetByUserNameAndPassword(email, password);
+            var u = await _userRepo.GetByEmailAndPassword(email, password);
             if (u == null) return NotFound();
             return Ok(u);
         }
