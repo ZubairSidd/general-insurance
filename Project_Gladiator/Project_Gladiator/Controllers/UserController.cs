@@ -46,13 +46,12 @@ namespace Project_Gladiator.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody]UpdateUserViewModel user)
         {
-            if (ModelState.IsValid)
-            {
-
-                var registeredUser = await _userRepo.Create(user);
+            if (await _userRepo.UserByEmail(user.email))
+                return BadRequest("This email already Exists");
+            var registeredUser = await _userRepo.Create(user);
+            if(registeredUser!= null)
                 return Ok(registeredUser);
-            }
-            else return NotFound("User not created");
+            return NotFound("User not created");
         }
         [Route("[action]/{Id:int}")]
         [HttpPost]

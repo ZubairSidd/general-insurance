@@ -33,13 +33,9 @@ namespace Project_Gladiator.Controllers
         [Route("[action]/{Id:int}")]
         public async Task<IActionResult> Update([FromRoute]int id,[FromBody] UpdateRenewalViewModel renewal)
         {
-            if (id != null) return NotFound("Error");
-            else
-            {
-                Renewal model = await _renewalRepo.Update(id, renewal);
-                if (model != null) return Ok(model);
-                else return NotFound("Error");
-            }
+            Renewal model = await _renewalRepo.Update(id, renewal);
+            if (model != null) return Ok(model);
+            else return NotFound("Error");
         }
         [Route("[action]")]
         public async Task<IActionResult> Register([FromBody] UpdateRenewalViewModel renewal)

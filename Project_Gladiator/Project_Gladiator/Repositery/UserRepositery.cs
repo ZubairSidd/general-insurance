@@ -61,7 +61,7 @@ namespace Project_Gladiator.Repositery
         }
         public async Task<bool> Exists(int id)
         {
-            return await _context.Users.AnyAsync(x => x.pay_id == id);
+            return await _context.Users.AnyAsync(x => x.user_id == id);
         }
         public async Task<User> Delete(int id)
         {
@@ -73,6 +73,10 @@ namespace Project_Gladiator.Repositery
                 return user;
             }
             return null;
+        }
+        public async Task<bool> UserByEmail(string email)
+        {
+            return await _context.Users.AnyAsync(x => x.email == email);
         }
     }
 }
