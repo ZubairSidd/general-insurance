@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project_Gladiator.Repositery;
+using Project_Gladiator.UpdateViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,20 @@ namespace Project_Gladiator.Controllers
         public async Task<IActionResult> GetPlan(int id)
         {
             return Ok(await _planRepo.GetPlanAsync(id));
+        }
+        [Route("[action]/{Id:int}")]
+        public async Task<IActionResult> Update([FromRoute]int id,[FromBody]UpdatePlanViewModel plan)
+        {
+            var model = await _planRepo.Update(id, plan);
+            if (model != null) return Ok(model);
+            return NotFound("Error");
+        }
+        [Route("[action]")]
+        public async Task<IActionResult> Register([FromBody] UpdatePlanViewModel plan)
+        {
+            var model = await _planRepo.Register(plan);
+            if (model != null) return Ok(model);
+            else return NotFound("Error in Register");
         }
     }
 }

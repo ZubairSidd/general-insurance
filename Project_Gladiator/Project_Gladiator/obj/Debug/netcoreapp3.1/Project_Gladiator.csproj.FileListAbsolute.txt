@@ -58,3 +58,4 @@ E:\Project_Gladiator\general-insurance\Project_Gladiator\Project_Gladiator\obj\D
 E:\Project_Gladiator\general-insurance\Project_Gladiator\Project_Gladiator\obj\Debug\netcoreapp3.1\Project_Gladiator.dll
 E:\Project_Gladiator\general-insurance\Project_Gladiator\Project_Gladiator\obj\Debug\netcoreapp3.1\Project_Gladiator.pdb
 E:\Project_Gladiator\general-insurance\Project_Gladiator\Project_Gladiator\obj\Debug\netcoreapp3.1\Project_Gladiator.genruntimeconfig.cache
+E:\Project_Gladiator\general-insurance\Project_Gladiator\Project_Gladiator\bin\Debug\netcoreapp3.1\Project_Gladiator.StaticWebAssets.xml
