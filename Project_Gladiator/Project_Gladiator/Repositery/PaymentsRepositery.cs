@@ -50,5 +50,21 @@ namespace Project_Gladiator.Repositery
             }
             else return null;
         }
+
+        public async Task<bool> Exists(int id)
+        {
+            return await _context.Payments.AnyAsync(x => x.pay_id == id);
+        }
+        public async Task<Payment> Delete(int id)
+        {
+            var payment = await this.GetPaymentAsync(id);
+            if (payment != null)
+            {
+                _context.Payments.Remove(payment);
+                await _context.SaveChangesAsync();
+                return payment;
+            }
+            return null;
+        }
     }
 }

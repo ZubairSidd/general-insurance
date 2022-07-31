@@ -33,13 +33,9 @@ namespace Project_Gladiator.Controllers
         [Route("[action]/{Id:int}")]
         public async Task<IActionResult> Update([FromRoute]int id,[FromBody] UpdateRenewalViewModel renewal)
         {
-            if (id != null) return NotFound("Error");
-            else
-            {
-                Renewal model = await _renewalRepo.Update(id, renewal);
-                if (model != null) return Ok(model);
-                else return NotFound("Error");
-            }
+            Renewal model = await _renewalRepo.Update(id, renewal);
+            if (model != null) return Ok(model);
+            else return NotFound("Error");
         }
         [Route("[action]")]
         public async Task<IActionResult> Register([FromBody] UpdateRenewalViewModel renewal)
@@ -47,6 +43,18 @@ namespace Project_Gladiator.Controllers
             Renewal model = await _renewalRepo.Register(renewal);
             if (model != null) return Ok(model);
             else return NotFound("Error");
+        }
+
+        [HttpDelete]
+        [Route("[action]/{Id:int}")]
+        public async Task<IActionResult> DeleteRenewal([FromRoute] int id)
+        {
+            if (await _renewalRepo.Exists(id))
+            {
+                var deletedRenewal = await _renewalRepo.Delete(id);
+                return Ok(deletedRenewal);
+            }
+            return NotFound();
         }
 
     }

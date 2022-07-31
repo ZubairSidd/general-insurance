@@ -13,5 +13,7 @@ namespace Project_Gladiator.Repositery
         Task<Payment> GetPaymentAsync(int id);
         Task<Payment> Update(int id, UpdatePaymentViewModel payment);
         Task<Payment> Register(UpdatePaymentViewModel payment);
+        Task<Payment> Delete(int id);
+        Task<bool> Exists(int id);
     }
 }

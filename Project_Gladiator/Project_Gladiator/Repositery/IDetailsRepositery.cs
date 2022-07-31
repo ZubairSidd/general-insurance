@@ -13,5 +13,7 @@ namespace Project_Gladiator.Repositery
         Task<Detail> GetDetailAsync(int id);
         Task<Detail> Register(UpdateDetailViewModel detail);
         Task<Detail> Update(int id, UpdateDetailViewModel detail);
+        Task<Detail> Delete(int id);
+        Task<bool> Exists(int id);
     }
 }

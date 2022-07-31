@@ -53,8 +53,22 @@ namespace Project_Gladiator.Repositery
                 await _context.SaveChangesAsync();
                 return model;
             }
-            else return null;
-            
+            else return null;            
+        }
+        public async Task<bool> Exists(int id)
+        {
+            return await _context.Purchases.AnyAsync(x => x.id == id);
+        }
+        public async Task<Purchase> Delete(int id)
+        {
+            var purchase = await this.GetPurchaseAsync(id);
+            if (purchase != null)
+            {
+                _context.Purchases.Remove(purchase);
+                await _context.SaveChangesAsync();
+                return purchase;
+            }
+            return null;
         }
     }
 }

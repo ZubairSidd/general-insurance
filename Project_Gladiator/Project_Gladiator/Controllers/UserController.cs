@@ -46,13 +46,12 @@ namespace Project_Gladiator.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody]UpdateUserViewModel user)
         {
-            if (ModelState.IsValid)
-            {
-
-                var registeredUser = await _userRepo.Create(user);
+            if (await _userRepo.UserByEmail(user.email))
+                return BadRequest("This email already Exists");
+            var registeredUser = await _userRepo.Create(user);
+            if(registeredUser!= null)
                 return Ok(registeredUser);
-            }
-            else return NotFound("User not created");
+            return NotFound("User not created");
         }
         [Route("[action]/{Id:int}")]
         [HttpPost]
@@ -66,6 +65,31 @@ namespace Project_Gladiator.Controllers
                 else return NotFound("User is not in database");
             }
             else return NotFound("User not created");
+        }
+        [HttpDelete]
+        [Route("[action]/{Id:int}")]
+        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        {
+            if (await _userRepo.Exists(id))
+            {
+                var deletedUser = await _userRepo.Delete(id);
+                return Ok(deletedUser);
+            }
+            return NotFound();
+        }
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> ForgotPassword([FromBody]ForgotPass fp)
+        {
+            if(!await _userRepo.UserByEmail(fp.email))
+            {
+                return BadRequest("Email doesn't not exist");
+            }
+            else
+            {
+                User u = await _userRepo.ForgotPassword(fp.email, fp.pass);
+                return Ok(u);
+            }
         }
     }
 

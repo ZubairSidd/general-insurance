@@ -15,5 +15,10 @@ namespace Project_Gladiator.Repositery
         Task<User> Create(UpdateUserViewModel user);
         Task<User> Update(int id,UpdateUserViewModel user);
 
+        Task<User> Delete(int id);
+        Task<bool> Exists(int id);
+        Task<bool> UserByEmail(string email);
+        Task<User> ForgotPassword(string email,string password);
+
     }
 }

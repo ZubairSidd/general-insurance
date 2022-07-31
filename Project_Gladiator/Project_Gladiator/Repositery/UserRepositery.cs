@@ -59,8 +59,33 @@ namespace Project_Gladiator.Repositery
             }
             else return null;            
         }
-
-
-
+        public async Task<bool> Exists(int id)
+        {
+            return await _context.Users.AnyAsync(x => x.user_id == id);
+        }
+        public async Task<User> Delete(int id)
+        {
+            var user = await this.GetUserAsync(id);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+                return user;
+            }
+            return null;
+        }
+        public async Task<bool> UserByEmail(string email)
+        {
+            return await _context.Users.AnyAsync(x => x.email == email);
+        }
+        public async Task<User> ForgotPassword(string email,string password)
+        {
+            User model = await _context.Users.Where(u => u.email == email).FirstOrDefaultAsync();
+            model.password = password;
+            model.conf_password = password;
+            _context.Users.Update(model);
+            await _context.SaveChangesAsync();
+            return model;
+        }
     }
 }

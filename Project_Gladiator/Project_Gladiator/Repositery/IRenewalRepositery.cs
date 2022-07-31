@@ -13,5 +13,7 @@ namespace Project_Gladiator.Repositery
         Task<Renewal> GetRenewalAsync(int id);
         Task<Renewal> Register(UpdateRenewalViewModel renewal);
         Task<Renewal> Update(int id, UpdateRenewalViewModel renewal);
+        Task<Renewal> Delete(int id);
+        Task<bool> Exists(int id);
     }
 }

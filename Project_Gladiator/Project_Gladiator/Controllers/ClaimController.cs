@@ -54,5 +54,17 @@ namespace Project_Gladiator.Controllers
             }
             else return NotFound("Claim not created");
         }
+
+        [HttpDelete]
+        [Route("[action]/{Id:int}")]
+        public async Task<IActionResult> DeleteClaim([FromRoute] int id)
+        {
+            if (await _claimRepo.Exists(id))
+            {
+                var deletedClaim = await _claimRepo.Delete(id);
+                return Ok(deletedClaim);
+            }
+            return NotFound();
+        }
     }
 }

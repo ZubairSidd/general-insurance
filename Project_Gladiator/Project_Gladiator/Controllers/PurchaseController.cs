@@ -50,5 +50,16 @@ namespace Project_Gladiator.Controllers
             if (p != null) return Ok(p);
             else return NotFound("Detail is not in the database");
         }
+        [HttpDelete]
+        [Route("[action]/{Id:int}")]
+        public async Task<IActionResult> DeletePurchase([FromRoute] int id)
+        {
+            if (await _purchaseRepo.Exists(id))
+            {
+                var deletedPurchase = await _purchaseRepo.Delete(id);
+                return Ok(deletedPurchase);
+            }
+            return NotFound();
+        }
     }
 }

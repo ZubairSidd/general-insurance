@@ -13,5 +13,7 @@ namespace Project_Gladiator.Repositery
         Task<Purchase> GetPurchaseAsync(int id);
         Task<Purchase> Register(UpdatePurchaseViewModel purchase);
         Task<Purchase> Update(int id,UpdatePurchaseViewModel purchase);
+        Task<Purchase> Delete(int id);
+        Task<bool> Exists(int id);
     }
 }
