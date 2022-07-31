@@ -36,5 +36,19 @@ namespace Project_Gladiator.Repositery
             await _context.SaveChangesAsync();
             return model;
         }
+        public async Task<Payment> Update(int id, UpdatePaymentViewModel payment)
+        {
+            Payment model = await GetPaymentAsync(id);
+            if (model != null)
+            {
+                model.user_id = payment.user_id;
+                model.date = payment.date;
+                model.purchase_id = payment.purchase_id;
+                _context.Payments.Update(model);
+                await _context.SaveChangesAsync();
+                return model;
+            }
+            else return null;
+        }
     }
 }

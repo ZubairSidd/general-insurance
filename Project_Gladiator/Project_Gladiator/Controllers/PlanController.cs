@@ -43,5 +43,16 @@ namespace Project_Gladiator.Controllers
             if (model != null) return Ok(model);
             else return NotFound("Error in Register");
         }
+        [HttpDelete]
+        [Route("[action]/{Id:int}")]
+        public async Task<IActionResult> DeletePlan([FromRoute] int id)
+        {
+            if (await _planRepo.Exists(id))
+            {
+                var deletedPlan = await _planRepo.Delete(id);
+                return Ok(deletedPlan);
+            }
+            return NotFound();
+        }
     }
 }

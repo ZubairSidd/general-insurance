@@ -39,5 +39,22 @@ namespace Project_Gladiator.Repositery
             await _context.SaveChangesAsync();
             return model;
         }
+        public async Task<Claim> Update(int id, UpdateClaimViewModel claim)
+        {
+            Claim model = await GetClaimAsync(id);
+            if (model != null)
+            {
+                model.user_id = claim.user_id;
+                model.plan_id = claim.plan_id;
+                model.date = claim.date;
+                model.reason = claim.reason;
+                model.amount = claim.amount;
+                model.status = claim.status;
+                _context.Claims.Update(model);
+                await _context.SaveChangesAsync();
+                return model;
+            }
+            else return null;
+        }
     }
 }
