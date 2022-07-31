@@ -29,7 +29,8 @@ namespace Project_Gladiator.Controllers
         {
             return Ok(await _paymentRepo.GetPaymentAsync(id));
         }
-
+        [HttpPost]
+        [Route("[action]")]
         public async Task<IActionResult> Register([FromBody] UpdatePaymentViewModel model)
         {
             if (ModelState.IsValid)

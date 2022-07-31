@@ -41,5 +41,14 @@ namespace Project_Gladiator.Controllers
             }
             else return NotFound("Purchase not created");
         }
+
+        [Route("[action]/{Id:int}")]
+        [HttpPost]
+        public async Task<IActionResult> Update([FromRoute]int id,[FromBody]UpdatePurchaseViewModel purchase)
+        {
+            var p = await _purchaseRepo.Update(id,purchase);
+            if (p != null) return Ok(p);
+            else return NotFound("Detail is not in the database");
+        }
     }
 }

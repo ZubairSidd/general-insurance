@@ -49,7 +49,7 @@ namespace Project_Gladiator.Repositery
                 model.end_date = purchase.end_date;
                 model.status = purchase.status;
 
-                await _context.Purchases.AddAsync(model);
+                 _context.Purchases.Update(model);
                 await _context.SaveChangesAsync();
                 return model;
             }

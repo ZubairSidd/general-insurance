@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Project_Gladiator.Models
 {
-    public class Plan_Details
+    public class Plan
     {
         [Key]
         public int plan_id { get; set; }
         public string type { get; set; }
-        public int duration { get; set; }
+        public int plan_details { get; set; }
         public decimal amount { get; set; }
         public int policy_number { get; set; }
     }
