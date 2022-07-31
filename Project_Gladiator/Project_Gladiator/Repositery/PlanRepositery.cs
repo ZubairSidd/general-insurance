@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace Project_Gladiator.Repositery
 {
-    public class Plan_DetailsRepositery:IPlan_DetailsRepositery
+    public class PlanRepositery:IPlanRepositery
     {
         private readonly ApplicationDbContext _context;
-        public Plan_DetailsRepositery(ApplicationDbContext context)
+        public PlanRepositery(ApplicationDbContext context)
         {
             _context = context;
         }
-        public async Task<List<Plan_Details>> GetAllPlansAsync()
+        public async Task<List<Plan>> GetAllPlansAsync()
         {
             return await _context.Plans.ToListAsync();
         }
-        public async Task<Plan_Details> GetPlanAsync(int id)
+        public async Task<Plan> GetPlanAsync(int id)
         {
             return await _context.Plans.Where(x => x.plan_id == id).FirstOrDefaultAsync();
         }

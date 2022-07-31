@@ -37,7 +37,7 @@ namespace Project_Gladiator
 
             services.AddScoped<IPaymentRepositery, PaymentsRepositery>();
 
-            services.AddScoped<IPlan_DetailsRepositery,Plan_DetailsRepositery>();
+            services.AddScoped<IPlanRepositery,PlanRepositery>();
             services.AddScoped<IPurchaseRepositery,PurchaseRepositery>();
             services.AddScoped<IRenewalRepositery, RenewalRepositery>();
             services.AddCors(options =>
