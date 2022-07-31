@@ -12,5 +12,6 @@ namespace Project_Gladiator.Repositery
         Task<List<Purchase>> GetAllPurchasesAsync();
         Task<Purchase> GetPurchaseAsync(int id);
         Task<Purchase> Register(UpdatePurchaseViewModel purchase);
+        Task<Purchase> Update(int id,UpdatePurchaseViewModel purchase);
     }
 }

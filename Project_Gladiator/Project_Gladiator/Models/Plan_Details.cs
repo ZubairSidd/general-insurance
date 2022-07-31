@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project_Gladiator.Models
 {
-    public class Plan
+    public class Plan_Details
     {
         [Key]
         public int plan_id { get; set; }

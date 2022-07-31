@@ -13,6 +13,7 @@ namespace Project_Gladiator.Repositery
         Task<User> GetUserAsync(int id);
         Task<User> GetByEmailAndPassword(string email, string password);
         Task<User> Create(UpdateUserViewModel user);
+        Task<User> Update(int id,UpdateUserViewModel user);
 
     }
 }

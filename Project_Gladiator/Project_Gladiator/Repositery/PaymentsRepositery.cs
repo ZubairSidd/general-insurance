@@ -30,7 +30,7 @@ namespace Project_Gladiator.Repositery
             Payment model = new Payment();
             model.user_id = payment.user_id;
             model.date = payment.date;
-            model.plan_id = payment.plan_id;
+            model.purchase_id = payment.purchase_id;
 
             await _context.Payments.AddAsync(model);
             await _context.SaveChangesAsync();

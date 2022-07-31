@@ -41,6 +41,26 @@ namespace Project_Gladiator.Repositery
             await _context.SaveChangesAsync();
             return model;
         }
-
+        public async Task<Detail> Update(int id, UpdateDetailViewModel detail)
+        {
+            Detail model = await GetDetailAsync(id);
+            if (model != null)
+            {
+                model.user_id = detail.user_id;
+                model.manufacturer = detail.manufacturer;
+                model.purchase_date = detail.purchase_date;
+                model.model = detail.model;
+                model.reg_number = detail.reg_number;
+                model.engine_number = detail.engine_number;
+                model.driving_license = detail.driving_license;
+                model.chasis_number = detail.chasis_number;
+                model.address = detail.address;
+                model.type = detail.type;
+                _context.Details.Update(model);
+                await _context.SaveChangesAsync();
+                return model;
+            }
+            else return null;
+        }
     }
 }

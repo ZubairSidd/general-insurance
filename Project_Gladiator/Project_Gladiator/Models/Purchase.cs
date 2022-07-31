@@ -11,8 +11,9 @@ namespace Project_Gladiator.Models
         [Key]
         public int id { get; set; }
         public int plan_id { get; set; }
-        public int user_id { get; set; }
+        public int detail_id { get; set; }
         public DateTime DOP { get; set; }
         public DateTime end_date { get; set; }
+        public int status { get; set; }
     }
 }

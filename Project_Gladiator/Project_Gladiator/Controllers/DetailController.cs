@@ -40,6 +40,16 @@ namespace Project_Gladiator.Controllers
             }
             else return NotFound("Detail not created");
         }
-
+        [Route("[action]/{Id:int}")]
+        public async Task<IActionResult> Update([FromRoute]int id,[FromBody] UpdateDetailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var detail = await _detailRepo.Update(id,model);
+                if (detail != null) return Ok(detail);
+                else return NotFound("Detail is not in database");
+            }
+            else return NotFound("Detail not created");
+        }
     }
 }
