@@ -50,5 +50,21 @@ namespace Project_Gladiator.Repositery
             }return null;
 
         }
+
+        public async Task<bool> Exists(int id)
+        {
+            return await _context.Plans.AnyAsync(x => x.plan_id == id);
+        }
+        public async Task<Plan> Delete(int id)
+        {
+            var plan = await this.GetPlanAsync(id);
+            if (plan != null)
+            {
+                _context.Plans.Remove(plan);
+                await _context.SaveChangesAsync();
+                return plan;
+            }
+            return null;
+        }
     }
 }

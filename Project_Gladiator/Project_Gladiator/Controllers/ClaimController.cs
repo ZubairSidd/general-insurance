@@ -41,5 +41,18 @@ namespace Project_Gladiator.Controllers
             }
             else return NotFound("claim not created");
         }
+        [Route("[action]/{Id:int}")]
+        [HttpPost]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateClaimViewModel claim)
+        {
+            if (ModelState.IsValid)
+            {
+                var registeredClaim = await _claimRepo.Update(id, claim);
+                if (registeredClaim != null)
+                    return Ok(registeredClaim);
+                else return NotFound("Claim is not in database");
+            }
+            else return NotFound("Claim not created");
+        }
     }
 }

@@ -41,5 +41,18 @@ namespace Project_Gladiator.Controllers
             }
             else return NotFound("Payment not created");
         }
+        [Route("[action]/{Id:int}")]
+        [HttpPost]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdatePaymentViewModel payment)
+        {
+            if (ModelState.IsValid)
+            {
+                var registeredPayment = await _paymentRepo.Update(id, payment);
+                if (registeredPayment != null)
+                    return Ok(registeredPayment);
+                else return NotFound("Payment is not in database");
+            }
+            else return NotFound("Payment not created");
+        }
     }
 }

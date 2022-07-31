@@ -13,5 +13,7 @@ namespace Project_Gladiator.Repositery
         Task<Plan> GetPlanAsync(int id);
         Task<Plan> Register(UpdatePlanViewModel plan);
         Task<Plan> Update(int id, UpdatePlanViewModel plan);
+        Task<Plan> Delete(int id);
+        Task<bool> Exists(int id);
     }
 }

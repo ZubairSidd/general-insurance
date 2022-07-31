@@ -12,5 +12,6 @@ namespace Project_Gladiator.Repositery
         Task<List<Claim>> GetAllClaimsAsync();
         Task<Claim> GetClaimAsync(int id);
         Task<Claim> Register(UpdateClaimViewModel claim);
+        Task<Claim> Update(int id, UpdateClaimViewModel claim);
     }
 }
