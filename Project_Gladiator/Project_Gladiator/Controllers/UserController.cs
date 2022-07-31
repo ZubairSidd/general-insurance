@@ -67,6 +67,17 @@ namespace Project_Gladiator.Controllers
             }
             else return NotFound("User not created");
         }
+        [HttpDelete]
+        [Route("[action]/{Id:int}")]
+        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        {
+            if (await _userRepo.Exists(id))
+            {
+                var deletedUser = await _userRepo.Delete(id);
+                return Ok(deletedUser);
+            }
+            return NotFound();
+        }
     }
 
 }

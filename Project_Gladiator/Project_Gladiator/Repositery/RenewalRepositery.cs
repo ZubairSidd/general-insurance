@@ -26,20 +26,16 @@ namespace Project_Gladiator.Repositery
         }
         public async Task<Renewal> Update(int id, UpdateRenewalViewModel renewal)
         {
-            if(id!= null)
+            Renewal model = await GetRenewalAsync(id);
+            if (model != null)
             {
-                Renewal model = await GetRenewalAsync(id);
-                if (model != null)
-                {
-                    model.purchase_id = renewal.purchase_id;
-                    model.user_id = renewal.user_id;
-                    _context.Renewals.Update(model);
-                    await _context.SaveChangesAsync();
-                    return model;
-                }
-                else return null;
-            }
-            return null;
+                 model.purchase_id = renewal.purchase_id;
+                 model.user_id = renewal.user_id;
+                 _context.Renewals.Update(model);
+                 await _context.SaveChangesAsync();
+                 return model;
+             }
+             else return null;
         }
         public async Task<Renewal> Register(UpdateRenewalViewModel renewal)
         {
@@ -49,6 +45,21 @@ namespace Project_Gladiator.Repositery
             await _context.Renewals.AddAsync(model);
             await _context.SaveChangesAsync();
             return model;
+        }
+        public async Task<bool> Exists(int id)
+        {
+            return await _context.Renewals.AnyAsync(x => x.renew_id == id);
+        }
+        public async Task<Renewal> Delete(int id)
+        {
+            var renewal = await this.GetRenewalAsync(id);
+            if (renewal != null)
+            {
+                _context.Renewals.Remove(renewal);
+                await _context.SaveChangesAsync();
+                return renewal;
+            }
+            return null;
         }
     }
 }

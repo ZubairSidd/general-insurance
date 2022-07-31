@@ -49,5 +49,17 @@ namespace Project_Gladiator.Controllers
             else return NotFound("Error");
         }
 
+        [HttpDelete]
+        [Route("[action]/{Id:int}")]
+        public async Task<IActionResult> DeleteRenewal([FromRoute] int id)
+        {
+            if (await _renewalRepo.Exists(id))
+            {
+                var deletedRenewal = await _renewalRepo.Delete(id);
+                return Ok(deletedRenewal);
+            }
+            return NotFound();
+        }
+
     }
 }

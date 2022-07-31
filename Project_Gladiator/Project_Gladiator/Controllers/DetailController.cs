@@ -51,5 +51,17 @@ namespace Project_Gladiator.Controllers
             }
             else return NotFound("Detail not created");
         }
+
+        [HttpDelete]
+        [Route("[action]/{Id:int}")]
+        public async Task<IActionResult> DeleteDetail([FromRoute] int id)
+        {
+            if (await _detailRepo.Exists(id))
+            {
+                var deletedDetail = await _detailRepo.Delete(id);
+                return Ok(deletedDetail);
+            }
+            return NotFound();
+        }
     }
 }

@@ -54,5 +54,17 @@ namespace Project_Gladiator.Controllers
             }
             else return NotFound("Payment not created");
         }
+
+        [HttpDelete]
+        [Route("[action]/{Id:int}")]
+        public async Task<IActionResult> DeletePayment([FromRoute] int id)
+        {
+            if (await _paymentRepo.Exists(id))
+            {
+                var deletedPayment = await _paymentRepo.Delete(id);
+                return Ok(deletedPayment);
+            }
+            return NotFound();
+        }
     }
 }
