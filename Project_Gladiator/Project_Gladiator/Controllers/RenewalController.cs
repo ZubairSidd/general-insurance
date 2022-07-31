@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Project_Gladiator.Models;
 using Project_Gladiator.Repositery;
+using Project_Gladiator.UpdateViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +30,24 @@ namespace Project_Gladiator.Controllers
         {
             return Ok(await _renewalRepo.GetRenewalAsync(id));
         }
+        [Route("[action]/{Id:int}")]
+        public async Task<IActionResult> Update([FromRoute]int id,[FromBody] UpdateRenewalViewModel renewal)
+        {
+            if (id != null) return NotFound("Error");
+            else
+            {
+                Renewal model = await _renewalRepo.Update(id, renewal);
+                if (model != null) return Ok(model);
+                else return NotFound("Error");
+            }
+        }
+        [Route("[action]")]
+        public async Task<IActionResult> Register([FromBody] UpdateRenewalViewModel renewal)
+        {
+            Renewal model = await _renewalRepo.Register(renewal);
+            if (model != null) return Ok(model);
+            else return NotFound("Error");
+        }
+
     }
 }
