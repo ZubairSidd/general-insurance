@@ -25,12 +25,12 @@ namespace Project_Gladiator.Controllers
 
             return Ok(await _userRepo.GetAllUsersAsync());
         }
-
+        
         [Route("[action]/{Id:int}")]
-        public async Task<IActionResult> GetUser(int id)
+        public async Task<IActionResult> GetUserById(int id)
         {
             User user = await _userRepo.GetUserAsync(id);
-            if (user != null) return Ok(User);
+            if (user != null) return Ok(user);
             else return NotFound();
         }
         
@@ -54,7 +54,19 @@ namespace Project_Gladiator.Controllers
             }
             else return NotFound("User not created");
         }
-
+        [Route("[action]/{Id:int}")]
+        [HttpPost]
+        public async Task<IActionResult> Update([FromRoute]int id,[FromBody] UpdateUserViewModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                var registeredUser = await _userRepo.Update(id, user);
+                if (registeredUser != null)
+                    return Ok(registeredUser);
+                else return NotFound("User is not in database");
+            }
+            else return NotFound("User not created");
+        }
     }
 
 }

@@ -29,13 +29,32 @@ namespace Project_Gladiator.Repositery
         {
             Purchase model = new Purchase();
             model.plan_id = purchase.plan_id;
-            model.user_id = purchase.user_id;
+            model.detail_id = purchase.detail_id;
             model.DOP = purchase.DOP;
             model.end_date = purchase.end_date;
+            model.status = purchase.status;
 
             await _context.Purchases.AddAsync(model);
             await _context.SaveChangesAsync();
-            return model; ;
+            return model;
+        }
+        public async Task<Purchase> Update(int id, UpdatePurchaseViewModel purchase)
+        {
+            Purchase model = await GetPurchaseAsync(id);
+            if (model != null)
+            {
+                model.plan_id = purchase.plan_id;
+                model.detail_id = purchase.detail_id;
+                model.DOP = purchase.DOP;
+                model.end_date = purchase.end_date;
+                model.status = purchase.status;
+
+                await _context.Purchases.AddAsync(model);
+                await _context.SaveChangesAsync();
+                return model;
+            }
+            else return null;
+            
         }
     }
 }

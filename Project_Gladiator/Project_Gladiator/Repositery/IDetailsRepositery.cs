@@ -12,5 +12,6 @@ namespace Project_Gladiator.Repositery
         Task<List<Detail>> GetAllDetailsAsync();
         Task<Detail> GetDetailAsync(int id);
         Task<Detail> Register(UpdateDetailViewModel detail);
+        Task<Detail> Update(int id, UpdateDetailViewModel detail);
     }
 }

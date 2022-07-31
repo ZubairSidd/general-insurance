@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Project_Gladiator.Repositery
 {
-    public interface IPlanRepositery
+    public interface IPlan_DetailsRepositery
     {
-        Task<List<Plan>> GetAllPlansAsync();
-        Task<Plan> GetPlanAsync(int id);
+        Task<List<Plan_Details>> GetAllPlansAsync();
+        Task<Plan_Details> GetPlanAsync(int id);
     }
 }

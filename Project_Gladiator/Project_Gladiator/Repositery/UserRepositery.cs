@@ -23,8 +23,8 @@ namespace Project_Gladiator.Repositery
         public async Task<User> GetUserAsync(int id)
         {
             var user = await _context.Users.Where(x => x.user_id == id).FirstOrDefaultAsync();
-            if (user == null) return null;
-            else return user;
+            if (user != null) return user;
+            else return null;
         }
         public async Task<User> GetByEmailAndPassword(string email, string password)
         {
@@ -43,6 +43,24 @@ namespace Project_Gladiator.Repositery
             await _context.SaveChangesAsync();
             return model; 
         }
+        public async Task<User> Update(int id,UpdateUserViewModel user)
+        {
+            User model = await GetUserAsync(id);
+            if (model != null)
+            {
+                model.name = user.name;
+                model.email = user.email;
+                model.dob = user.dob;
+                model.password = user.password;
+                model.conf_password = user.conf_password;
+                _context.Users.Update(model);
+                await _context.SaveChangesAsync();
+                return model;
+            }
+            else return null;            
+        }
+
+
 
     }
 }

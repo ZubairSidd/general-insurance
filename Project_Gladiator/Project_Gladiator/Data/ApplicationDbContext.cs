@@ -17,7 +17,7 @@ namespace Project_Gladiator.Data
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Claim> Claims { get; set; }
         public DbSet<Detail>Details { get; set; }
-        public DbSet<Plan> Plans { get; set; }
+        public DbSet<Plan_Details> Plans { get; set; }
         public DbSet<Renewal> Renewals { get; set; }
 
         public DbSet<Purchase> Purchases { get; set; }

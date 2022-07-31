@@ -10,10 +10,10 @@ namespace Project_Gladiator.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PlanController : ControllerBase
+    public class Plan_DetailsController : ControllerBase
     {
-        private IPlanRepositery _planRepo;
-        public PlanController(IPlanRepositery planRepo)
+        private IPlan_DetailsRepositery _planRepo;
+        public Plan_DetailsController(IPlan_DetailsRepositery planRepo)
         {
             _planRepo = planRepo;
         }

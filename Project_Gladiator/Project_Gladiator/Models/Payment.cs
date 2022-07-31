@@ -12,6 +12,6 @@ namespace Project_Gladiator.Models
         public int pay_id { get; set; }
         public int user_id { get; set; }
         public DateTime date { get; set; }
-        public int plan_id { get; set; }
+        public int purchase_id { get; set; }
     }
 }
