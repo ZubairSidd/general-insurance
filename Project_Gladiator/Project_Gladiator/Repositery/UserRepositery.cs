@@ -78,5 +78,14 @@ namespace Project_Gladiator.Repositery
         {
             return await _context.Users.AnyAsync(x => x.email == email);
         }
+        public async Task<User> ForgotPassword(string email,string password)
+        {
+            User model = await _context.Users.Where(u => u.email == email).FirstOrDefaultAsync();
+            model.password = password;
+            model.conf_password = password;
+            _context.Users.Update(model);
+            await _context.SaveChangesAsync();
+            return model;
+        }
     }
 }

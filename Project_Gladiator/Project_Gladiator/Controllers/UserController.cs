@@ -77,6 +77,20 @@ namespace Project_Gladiator.Controllers
             }
             return NotFound();
         }
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> ForgotPassword([FromBody]ForgotPass fp)
+        {
+            if(!await _userRepo.UserByEmail(fp.email))
+            {
+                return BadRequest("Email doesn't not exist");
+            }
+            else
+            {
+                User u = await _userRepo.ForgotPassword(fp.email, fp.pass);
+                return Ok(u);
+            }
+        }
     }
 
 }
