@@ -54,7 +54,7 @@ namespace Project_Gladiator.Controllers
             return NotFound("User not created");
         }
         [Route("[action]/{Id:int}")]
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> Update([FromRoute]int id,[FromBody] UpdateUserViewModel user)
         {
             if (ModelState.IsValid)
@@ -77,7 +77,7 @@ namespace Project_Gladiator.Controllers
             }
             return NotFound();
         }
-        [HttpPost]
+        [HttpPut]
         [Route("[action]")]
         public async Task<IActionResult> ForgotPassword([FromBody]ForgotPass fp)
         {

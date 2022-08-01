@@ -42,7 +42,7 @@ namespace Project_Gladiator.Controllers
             else return NotFound("Payment not created");
         }
         [Route("[action]/{Id:int}")]
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdatePaymentViewModel payment)
         {
             if (ModelState.IsValid)

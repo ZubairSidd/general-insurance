@@ -11,7 +11,7 @@ namespace Project_Gladiator.Models
         [Key]
         public int claim_no { get; set; }
         public int user_id { get; set; }
-        public int plan_id { get; set; }
+        public int pay_id { get; set; }
         public DateTime date { get; set; }
         public string reason { get; set; }
         public decimal amount { get; set; }
