@@ -30,6 +30,7 @@ namespace Project_Gladiator.Controllers
             return Ok(await _planRepo.GetPlanAsync(id));
         }
         [Route("[action]/{Id:int}")]
+        [HttpPut]
         public async Task<IActionResult> Update([FromRoute]int id,[FromBody]UpdatePlanViewModel plan)
         {
             var model = await _planRepo.Update(id, plan);
@@ -37,6 +38,7 @@ namespace Project_Gladiator.Controllers
             return NotFound("Error");
         }
         [Route("[action]")]
+        [HttpPost]
         public async Task<IActionResult> Register([FromBody] UpdatePlanViewModel plan)
         {
             var model = await _planRepo.Register(plan);

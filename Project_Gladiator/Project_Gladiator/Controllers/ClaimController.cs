@@ -31,6 +31,7 @@ namespace Project_Gladiator.Controllers
         }
 
         [Route("[action]")]
+        [HttpPost]
         public async Task<IActionResult> Register([FromBody] UpdateClaimViewModel model)
         {
             if (ModelState.IsValid)
@@ -42,7 +43,7 @@ namespace Project_Gladiator.Controllers
             else return NotFound("claim not created");
         }
         [Route("[action]/{Id:int}")]
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateClaimViewModel claim)
         {
             if (ModelState.IsValid)

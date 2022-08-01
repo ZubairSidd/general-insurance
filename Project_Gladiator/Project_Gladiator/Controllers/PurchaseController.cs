@@ -29,7 +29,7 @@ namespace Project_Gladiator.Controllers
         {
             return Ok(await _purchaseRepo.GetPurchaseAsync(id));
         }
-
+        [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> Register([FromBody] UpdatePurchaseViewModel model)
         {
@@ -43,7 +43,7 @@ namespace Project_Gladiator.Controllers
         }
 
         [Route("[action]/{Id:int}")]
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> Update([FromRoute]int id,[FromBody]UpdatePurchaseViewModel purchase)
         {
             var p = await _purchaseRepo.Update(id,purchase);

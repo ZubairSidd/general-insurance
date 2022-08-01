@@ -29,7 +29,7 @@ namespace Project_Gladiator.Repositery
         {
             Claim model = new Claim();
             model.user_id = claim.user_id;
-            model.plan_id = claim.plan_id;
+            model.pay_id = claim.pay_id;
             model.date = claim.date;
             model.reason = claim.reason;
             model.amount = claim.amount;
@@ -45,7 +45,7 @@ namespace Project_Gladiator.Repositery
             if (model != null)
             {
                 model.user_id = claim.user_id;
-                model.plan_id = claim.plan_id;
+                model.pay_id = claim.pay_id;
                 model.date = claim.date;
                 model.reason = claim.reason;
                 model.amount = claim.amount;

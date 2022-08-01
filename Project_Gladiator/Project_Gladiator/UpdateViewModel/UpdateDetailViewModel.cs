@@ -11,7 +11,7 @@ namespace Project_Gladiator.UpdateViewModel
         public string manufacturer { get; set; }
         public string model { get; set; }
         public DateTime purchase_date { get; set; }
-        public int reg_number { get; set; }
+        public string reg_number { get; set; }
         public int engine_number { get; set; }
         public string driving_license { get; set; }
         public string chasis_number { get; set; }

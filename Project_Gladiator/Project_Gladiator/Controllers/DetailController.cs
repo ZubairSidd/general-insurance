@@ -30,6 +30,7 @@ namespace Project_Gladiator.Controllers
             return Ok(await _detailRepo.GetDetailAsync(id));
         }
         [Route("[action]")]
+        [HttpPost]
         public async Task<IActionResult> Register([FromBody] UpdateDetailViewModel model)
         {
             if (ModelState.IsValid)
@@ -41,6 +42,7 @@ namespace Project_Gladiator.Controllers
             else return NotFound("Detail not created");
         }
         [Route("[action]/{Id:int}")]
+        [HttpPut]
         public async Task<IActionResult> Update([FromRoute]int id,[FromBody] UpdateDetailViewModel model)
         {
             if (ModelState.IsValid)
