@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+//It will commnunicate with the database through dbcontext
+//Contains all the definition of the methods which are declared in its interface
+
+
 namespace Project_Gladiator.Repositery
 {
     public class PurchaseRepositery : IPurchaseRepositery
@@ -14,18 +18,18 @@ namespace Project_Gladiator.Repositery
         private readonly ApplicationDbContext _context;
         public PurchaseRepositery(ApplicationDbContext context)
         {
-            _context = context;
+            _context = context;//Initialising the database context
         }
-        public async Task<List<Purchase>> GetAllPurchasesAsync()
+        public async Task<List<Purchase>> GetAllPurchasesAsync()//Definition for fetching all the purchase from the database
         {
             return await _context.Purchases.ToListAsync();
         }
-        public async Task<Purchase> GetPurchaseAsync(int id)
+        public async Task<Purchase> GetPurchaseAsync(int id)//Definition for fetching the sepefic purchase from the database
         {
             return await _context.Purchases.Where(x => x.id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<Purchase> Register(UpdatePurchaseViewModel purchase)
+        public async Task<Purchase> Register(UpdatePurchaseViewModel purchase)//Definition for inserting new purchase into the database
         {
             Purchase model = new Purchase();
             model.plan_id = purchase.plan_id;
@@ -38,7 +42,7 @@ namespace Project_Gladiator.Repositery
             await _context.SaveChangesAsync();
             return model;
         }
-        public async Task<Purchase> Update(int id, UpdatePurchaseViewModel purchase)
+        public async Task<Purchase> Update(int id, UpdatePurchaseViewModel purchase)//Definition for updating the purchase in  the database
         {
             Purchase model = await GetPurchaseAsync(id);
             if (model != null)
@@ -55,7 +59,7 @@ namespace Project_Gladiator.Repositery
             }
             else return null;            
         }
-        public async Task<bool> Exists(int id)
+        public async Task<bool> Exists(int id)//Definition for check whether the specific purchase exists in the database
         {
             return await _context.Purchases.AnyAsync(x => x.id == id);
         }
