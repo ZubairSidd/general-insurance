@@ -7,6 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+
+//It will commnunicate with the database through dbcontext
+//Contains all the definition of the methods which are declared in its interface
+
+
 namespace Project_Gladiator.Repositery
 {
     public class RenewalRepositery:IRenewalRepositery
@@ -14,17 +20,17 @@ namespace Project_Gladiator.Repositery
         private readonly ApplicationDbContext _context;
         public RenewalRepositery(ApplicationDbContext context)
         {
-            _context = context;
+            _context = context;//Initialising the database context
         }
-        public async Task<List<Renewal>> GetAllRenewalsAsync()
+        public async Task<List<Renewal>> GetAllRenewalsAsync()//Definition for fetching all the renewal from the database
         {
             return await _context.Renewals.ToListAsync();
         }
-        public async Task<Renewal> GetRenewalAsync(int id)
+        public async Task<Renewal> GetRenewalAsync(int id)//Definition for fetching the sepefic renewal from the database
         {
             return await _context.Renewals.Where(x => x.renew_id == id).FirstOrDefaultAsync();
         }
-        public async Task<Renewal> Update(int id, UpdateRenewalViewModel renewal)
+        public async Task<Renewal> Update(int id, UpdateRenewalViewModel renewal)//Definition for updating the renewal in  the database
         {
             Renewal model = await GetRenewalAsync(id);
             if (model != null)
@@ -37,7 +43,7 @@ namespace Project_Gladiator.Repositery
              }
              else return null;
         }
-        public async Task<Renewal> Register(UpdateRenewalViewModel renewal)
+        public async Task<Renewal> Register(UpdateRenewalViewModel renewal)//Definition for inserting new renewal into the database
         {
             Renewal model = new Renewal();
             model.purchase_id = renewal.purchase_id;
@@ -46,7 +52,7 @@ namespace Project_Gladiator.Repositery
             await _context.SaveChangesAsync();
             return model;
         }
-        public async Task<bool> Exists(int id)
+        public async Task<bool> Exists(int id)//Definition for check whether the specific renewal exists in the database
         {
             return await _context.Renewals.AnyAsync(x => x.renew_id == id);
         }

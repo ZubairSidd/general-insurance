@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+//It will commnunicate with the database through dbcontext
+//Contains all the definition of the methods which are declared in its interface
+
 namespace Project_Gladiator.Repositery
 {
     public class ClaimRepositery : IClaimRepositery
@@ -14,18 +18,18 @@ namespace Project_Gladiator.Repositery
         private readonly ApplicationDbContext _context;
         public ClaimRepositery(ApplicationDbContext context)
         {
-            _context = context;
+            _context = context;//Initialising the database context
         }
         public async Task<List<Claim>> GetAllClaimsAsync()
         {
-            return await _context.Claims.ToListAsync();
+            return await _context.Claims.ToListAsync();//
         }
         public async Task<Claim> GetClaimAsync(int id)
         {
             return await _context.Claims.Where(x => x.claim_no == id).FirstOrDefaultAsync();
         }
 
-        public async Task<Claim> Register(UpdateClaimViewModel claim)
+        public async Task<Claim> Register(UpdateClaimViewModel claim)//Definition for inserting new claim into the database
         {
             Claim model = new Claim();
             model.user_id = claim.user_id;
@@ -39,7 +43,7 @@ namespace Project_Gladiator.Repositery
             await _context.SaveChangesAsync();
             return model;
         }
-        public async Task<Claim> Update(int id, UpdateClaimViewModel claim)
+        public async Task<Claim> Update(int id, UpdateClaimViewModel claim)//Definition for updating the claim if it exists
         {
             Claim model = await GetClaimAsync(id);
             if (model != null)
@@ -56,11 +60,11 @@ namespace Project_Gladiator.Repositery
             }
             else return null;
         }
-        public async Task<bool> Exists(int id)
+        public async Task<bool> Exists(int id)//Definition for  checking whether claim exists or not
         {
             return await _context.Claims.AnyAsync(x => x.claim_no == id);
         }
-        public async Task<Claim> Delete(int id)
+        public async Task<Claim> Delete(int id)////Definition for deleting the claim from the database
         {
             var claim = await this.GetClaimAsync(id);
             if (claim != null)

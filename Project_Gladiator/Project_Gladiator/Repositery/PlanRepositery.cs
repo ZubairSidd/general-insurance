@@ -7,6 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+//It will commnunicate with the database through dbcontext
+//Contains all the definition of the methods which are declared in its interface
+
+
 namespace Project_Gladiator.Repositery
 {
     public class PlanRepositery:IPlanRepositery
@@ -14,17 +19,17 @@ namespace Project_Gladiator.Repositery
         private readonly ApplicationDbContext _context;
         public PlanRepositery(ApplicationDbContext context)
         {
-            _context = context;
+            _context = context;//Initialising the database context
         }
-        public async Task<List<Plan>> GetAllPlansAsync()
+        public async Task<List<Plan>> GetAllPlansAsync()//Definition for fetching all the plan from the database
         {
             return await _context.Plans.ToListAsync();
         }
-        public async Task<Plan> GetPlanAsync(int id)
+        public async Task<Plan> GetPlanAsync(int id)//Definition for fetching the sepefic plan from the database
         {
             return await _context.Plans.Where(x => x.plan_id == id).FirstOrDefaultAsync();
         }
-        public async Task<Plan> Register(UpdatePlanViewModel plan)
+        public async Task<Plan> Register(UpdatePlanViewModel plan)//Definition for inserting new plan into the database
         {
             Plan model = new Plan();
             model.amount = plan.amount;
@@ -35,7 +40,7 @@ namespace Project_Gladiator.Repositery
             await _context.SaveChangesAsync();
             return model;
         }
-        public async Task<Plan> Update(int id, UpdatePlanViewModel plan)
+        public async Task<Plan> Update(int id, UpdatePlanViewModel plan)//Definition for updating the plan in  the database
         {
             var model = await GetPlanAsync(id);
             if(model != null)
@@ -51,7 +56,7 @@ namespace Project_Gladiator.Repositery
 
         }
 
-        public async Task<bool> Exists(int id)
+        public async Task<bool> Exists(int id)//Definition for check whether the specific plan exists in the database
         {
             return await _context.Plans.AnyAsync(x => x.plan_id == id);
         }

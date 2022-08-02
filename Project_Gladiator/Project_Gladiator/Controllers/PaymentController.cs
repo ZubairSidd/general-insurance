@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+
+//Controller for Payments Table 
+//It will only call the method which are defined in the PaymentRepositery.cs and IPaymentRepositery.cs
 namespace Project_Gladiator.Controllers
 {
     [Route("api/[controller]")]
@@ -16,55 +20,57 @@ namespace Project_Gladiator.Controllers
         private IPaymentRepositery _paymentRepo;
         public PaymentController(IPaymentRepositery paymentRepo)
         {
-            _paymentRepo = paymentRepo;
+            _paymentRepo = paymentRepo;//Initialising the Repositery
         }
         [Route("[action]")]
-        public async Task<IActionResult> GetAllPayments()
+        public async Task<IActionResult> GetAllPayments()//It will fetch all the payments from the payments table
         {
-            return Ok(await _paymentRepo.GetAllPaymentsAsync());
+            return Ok(await _paymentRepo.GetAllPaymentsAsync());//Calling the method defined in the Repo
         }
 
         [Route("[action]/{Id:int}")]
-        public async Task<IActionResult> GetPayment(int id)
+        //It will receive Id from the front-end
+        public async Task<IActionResult> GetPayment(int id)//This method will fetch the specific payment by Id from the database.
         {
-            return Ok(await _paymentRepo.GetPaymentAsync(id));
+            return Ok(await _paymentRepo.GetPaymentAsync(id));////Calling the method defined in the Repo
         }
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> Register([FromBody] UpdatePaymentViewModel model)
+        public async Task<IActionResult> Register([FromBody] UpdatePaymentViewModel model)//It will insert a new Payment in the database.
         {
             if (ModelState.IsValid)
             {
-
-                var detail = await _paymentRepo.Register(model);
+                var detail = await _paymentRepo.Register(model);//Calling the method defined in the Repo
                 return Ok(detail);
             }
-            else return NotFound("Payment not created");
+            else return BadRequest("Payment not created");
         }
         [Route("[action]/{Id:int}")]
+        //This method will get the Id from the front-end
         [HttpPut]
-        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdatePaymentViewModel payment)
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdatePaymentViewModel payment)//It will update the payment by Id in the database.
         {
             if (ModelState.IsValid)
             {
-                var registeredPayment = await _paymentRepo.Update(id, payment);
+                var registeredPayment = await _paymentRepo.Update(id, payment);//Calling the method defined in the Repo
                 if (registeredPayment != null)
                     return Ok(registeredPayment);
-                else return NotFound("Payment is not in database");
+                else return BadRequest("Payment is not in database");
             }
-            else return NotFound("Payment not created");
+            else return BadRequest("Payment not created");
         }
 
         [HttpDelete]
         [Route("[action]/{Id:int}")]
-        public async Task<IActionResult> DeletePayment([FromRoute] int id)
+        //It will get the Id from the front-end
+        public async Task<IActionResult> DeletePayment([FromRoute] int id)//It will delete the payment by Id from the database.
         {
-            if (await _paymentRepo.Exists(id))
+            if (await _paymentRepo.Exists(id))//If payment exists
             {
-                var deletedPayment = await _paymentRepo.Delete(id);
+                var deletedPayment = await _paymentRepo.Delete(id);//Calling the method defined in the Repo
                 return Ok(deletedPayment);
             }
-            return NotFound();
+            return BadRequest("Payment doesn't exists");//Payment doesn't exists
         }
     }
 }
